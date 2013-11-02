@@ -1,0 +1,22 @@
+{
+  "name": "solr_angular",
+  "version": "0.0.1",
+  "authors": [
+    "Robert J Witoff <witoff@jpl.nasa.gov>"
+  ],
+  "description": "testing solr and angular by rob",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.0.3",
+    "bootstrap": "~3.0.1",
+    "angular": "~1.0.8"
+  }
+}

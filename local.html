@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+  <head>
+    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <script src="bower_components/angular/angular.min.js"></script>
+  </head>
+  <body>
+
+    <div ng-app>
+      Search Results:
+      <div ng-controller="Controller">
+        <input ng-model="query" ng-change="change()" id="txtSearch" ="arst"></input>
+        {{query}}
+        {{counter}}
+        <span ng-model="results" ng-repeat="r in results">
+            <p>{{r.name}} - {{r.id}}</p>
+        </span>
+      </div>
+    </div>
+
+    <!-- SCRIPT INCLUDES -->
+    <script src="bower_components/jquery/jquery.min.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+    
+    function Controller($scope, $http) {
+      $scope.query = "initial query here";
+      $scope.results = [];
+      window.results = $scope.results;
+
+      angular.callbacks.solrCallback = function(data) {
+        console.log('Respone: ', data.response);
+        console.log('--Result Count:', data.response.docs.length);
+        $scope.results = data.response.docs;
+        $scope.counter = $scope.results.length;
+        $scope.$apply();
+
+      }
+      $scope.change = function() {
+        console.log('Changing: ', $scope.query)
+        $.getJSON('http://localhost:8983/solr/collection1/select?callback=?', 
+          { q : $scope.query,
+            wt : 'json',
+            'json.wrf':'angular.callbacks.solrCallback'
+          });
+      };
+    </script>
+  </body>
+</html>
