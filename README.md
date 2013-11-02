@@ -2,6 +2,7 @@
 
 Stub for connecting Angular ontop of your favorite solr install.
 
+Usage:
 ```bash
 bower install
 open local.html
